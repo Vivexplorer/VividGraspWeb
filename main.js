@@ -215,6 +215,7 @@ function spawnBall(kind) {
     vel: new THREE.Vector3(0, 0, 0),
     attached: false,
     settled: false,
+    delivered: false,
   });
 }
 
@@ -320,18 +321,20 @@ function tickMove(dt) {
 }
 
 function isInAnyTray(b) {
+  // Generous margin so balls jostled near the tray wall still count as "in".
+  const m = TRAY_HALF + 0.04;
   for (const tp of Object.values(TRAYS)) {
-    if (Math.abs(b.pos.x - tp.x) < TRAY_HALF &&
-        Math.abs(b.pos.z - tp.z) < TRAY_HALF) return true;
+    if (Math.abs(b.pos.x - tp.x) < m && Math.abs(b.pos.z - tp.z) < m) return true;
   }
   return false;
 }
 
 function pickNextBall() {
-  // Choose nearest settled ball that isn't already sitting in a tray.
+  // Choose nearest settled ball that hasn't already been delivered and isn't sitting in a tray.
   let best = null, bestD = Infinity;
   for (const b of balls) {
     if (b.attached) continue;
+    if (b.delivered) continue;
     if (!b.settled && b.pos.y > b.radius * 1.5) continue;
     if (isInAnyTray(b)) continue;
     const d = Math.hypot(b.pos.x, b.pos.z);
@@ -400,6 +403,7 @@ function stepRoutine(dt) {
         b.attached = false;
         b.vel.set(0, 0, 0);
         b.settled = false;
+        b.delivered = true;
         routine.holdTimer = 0.4;
         routine.state = 'RELEASE_WAIT';
         Status.set(`released into ${b.kind} tray`);
