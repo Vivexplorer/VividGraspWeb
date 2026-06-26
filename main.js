@@ -319,12 +319,21 @@ function tickMove(dt) {
   return routine.t >= 1;
 }
 
+function isInAnyTray(b) {
+  for (const tp of Object.values(TRAYS)) {
+    if (Math.abs(b.pos.x - tp.x) < TRAY_HALF &&
+        Math.abs(b.pos.z - tp.z) < TRAY_HALF) return true;
+  }
+  return false;
+}
+
 function pickNextBall() {
-  // Choose nearest settled ball.
+  // Choose nearest settled ball that isn't already sitting in a tray.
   let best = null, bestD = Infinity;
   for (const b of balls) {
     if (b.attached) continue;
     if (!b.settled && b.pos.y > b.radius * 1.5) continue;
+    if (isInAnyTray(b)) continue;
     const d = Math.hypot(b.pos.x, b.pos.z);
     if (d < bestD) { bestD = d; best = b; }
   }
