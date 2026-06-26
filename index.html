@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VividGrasp — Interactive Sorting Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="canvas-wrap">
+      <canvas id="scene"></canvas>
+      <div id="overlay-title">
+        <h1>VividGrasp</h1>
+        <p>A browser recreation of the Stanford AI4ALL color-sorting arm.</p>
+      </div>
+    </div>
+
+    <aside id="sidebar">
+      <h2>Controls</h2>
+      <div class="row">
+        <button id="play">▶ Play</button>
+        <button id="reset">Reset</button>
+      </div>
+      <h3>Spawn a ball</h3>
+      <div class="row">
+        <button class="ball-btn" data-kind="tennis">+ Tennis</button>
+        <button class="ball-btn" data-kind="baseball">+ Baseball</button>
+        <button class="ball-btn" data-kind="pingpong">+ Ping Pong</button>
+      </div>
+
+      <h3>Camera view</h3>
+      <canvas id="cam-view" width="192" height="144"></canvas>
+
+      <h3>HSV masks (detector)</h3>
+      <div class="masks">
+        <figure><canvas id="mask-tennis" width="96" height="72"></canvas><figcaption>Tennis</figcaption></figure>
+        <figure><canvas id="mask-baseball" width="96" height="72"></canvas><figcaption>Baseball</figcaption></figure>
+        <figure><canvas id="mask-pingpong" width="96" height="72"></canvas><figcaption>Ping pong</figcaption></figure>
+      </div>
+
+      <h3>Status</h3>
+      <div id="status">idle</div>
+
+      <p class="credit">
+        Based on <a href="https://github.com/LenekyRadish/VividGrasp" target="_blank" rel="noopener">VividGrasp</a> — Stanford AI4ALL.
+      </p>
+    </aside>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

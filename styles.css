@@ -1,0 +1,78 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  height: 100vh;
+}
+
+#canvas-wrap {
+  position: relative;
+  background: #161b22;
+}
+
+#scene { width: 100%; height: 100%; display: block; }
+
+#overlay-title {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  pointer-events: none;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+#overlay-title h1 { margin: 0; font-size: 22px; letter-spacing: 0.5px; }
+#overlay-title p { margin: 4px 0 0; font-size: 13px; opacity: 0.85; }
+
+#sidebar {
+  padding: 18px 16px;
+  border-left: 1px solid #21262d;
+  overflow-y: auto;
+  background: #0d1117;
+}
+#sidebar h2 { margin: 0 0 12px; font-size: 16px; }
+#sidebar h3 { margin: 18px 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #8b949e; }
+
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+button {
+  background: #21262d;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+button:hover { background: #30363d; }
+button:active { background: #161b22; }
+
+.ball-btn[data-kind="tennis"]    { border-color: #d4e000; color: #f0ff5a; }
+.ball-btn[data-kind="baseball"]  { border-color: #d0d7de; color: #f6f8fa; }
+.ball-btn[data-kind="pingpong"]  { border-color: #ff6f1a; color: #ffb284; }
+
+#cam-view, .masks canvas {
+  background: #000;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.masks { display: flex; gap: 6px; }
+.masks figure { margin: 0; text-align: center; }
+.masks figcaption { font-size: 10px; color: #8b949e; margin-top: 2px; }
+
+#status {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 12px;
+  color: #7ee787;
+  background: #161b22;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #21262d;
+}
+
+.credit { font-size: 11px; color: #8b949e; margin-top: 22px; }
+.credit a { color: #58a6ff; }
